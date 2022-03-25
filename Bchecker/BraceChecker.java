@@ -7,20 +7,23 @@ public class BraceChecker {
         this.text = text;
     }
 
-    public void check(){
-        Stack stack = new Stack();
+      public void check(){
+        Stack<Character> stack = new Stack();
         for (int i = 0; i < text.length(); i++) {
             if(text.charAt(i) == '(' || text.charAt(i) == '[' || text.charAt(i) == '{'){
-                stack.push(i);
+                stack.push((char) i);
             }else{
-                if (text.charAt(i) == ')' && stack.pop() != '('){
-                    System.out.println("Error 1");
-                }else if(text.charAt(i) == ']' && stack.pop() != '['){
-                    System.out.println("Error 2");
-                }else if(text.charAt(i) == '}' && stack.pop() != '{'){
-                    System.out.println("Error 3");
+                char opened = stack.pop();
+                if (text.charAt(i) == ')' && stack.pop() != '(' 
+                        || text.charAt(i) == ']' && stack.pop() != '[' 
+                        || text.charAt(i) == '}' && stack.pop() != '{') {
+                    showErrorMessage(opened, text.charAt(i));
                 }
             }
         }
+    }
+    
+    private void showErrorMessage(char opened, char closed) {
+        System.out.println("Error 1 opened " + opened + "closed " + closed);
     }
 }
