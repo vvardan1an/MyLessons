@@ -96,8 +96,12 @@ abstract class Mammal extends Animal implements Speakable {
 
     @Override
     public void speak() {
-        System.out.println("Somebody speaks");
+        Speakable.super.speak();
     }
+    //    @Override
+//    public void speak() {
+//        System.out.println("Somebody speaks");
+//    }
 }
 class Lev extends Mammal{
     public Lev(String name) {
@@ -121,5 +125,7 @@ class Lev extends Mammal{
 }
 
 interface Speakable {
-    void speak();
+    default void speak(){
+        System.out.println("Somebody speaks");
+    }
 }
